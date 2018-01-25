@@ -77,7 +77,7 @@
   <div class="container">
     <div class="navbar-header">
       <?php if ($logo): ?>
-      <a class="logo navbar-btn pull-left" href="//its.umich.edu" title="<?php print t('U-M Information and Technology Services'); ?>">
+      <a class="logo navbar-btn pull-left" href="/" title="<?php print t('U-M Information and Technology Services'); ?>">
         <img src="<?php print $logo; ?>" alt="<?php print t('U-M Information and Technology Services'); ?>" />
       </a>
       <?php endif; ?>
