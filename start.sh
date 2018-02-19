@@ -26,6 +26,7 @@ c_rehash /etc/ssl/certs
 a2enmod ssl
 a2enmod include
 a2ensite default-ssl 
+a2ensite fleming-dev.openshift.dsc.umich.edu
 
 ## set SGID for www-data 
 chown -R www-data.www-data /var/www/html /var/cosign
