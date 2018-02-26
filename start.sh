@@ -10,15 +10,15 @@ ln -sf /secrets/apache2/ports.conf /etc/apache2/ports.conf
 ln -sf /secrets/apache2/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 ln -sf /secrets/apache2/cosign.conf /etc/apache2/mods-available/cosign.conf
 
-# app secrets
-ln -sf /secrets/app/settings.php /var/www/html/sites/default/settings.php
-
 # SSL secrets
 ln -sf /secrets/ssl/USERTrustRSACertificationAuthority.pem /etc/ssl/certs/USERTrustRSACertificationAuthority.pem
 ln -sf /secrets/ssl/AddTrustExternalCARoot.pem /etc/ssl/certs/AddTrustExternalCARoot.pem
 ln -sf /secrets/ssl/sha384-Intermediate-cert.pem /etc/ssl/certs/sha384-Intermediate-cert.pem
-ln -sf /secrets/ssl/fleming-dev.openshift.dsc.umich.edu.cert /etc/ssl/certs/fleming-dev.openshift.dsc.umich.edu.cert
-ln -sf /secrets/ssl/fleming-dev.openshift.dsc.umich.edu.key /etc/ssl/private/fleming-dev.openshift.dsc.umich.edu.key
+
+if [ -f /secrets/app/local.start.sh ]
+then
+  /bin/sh /secrets/app/local.start.sh
+fi
 
 ## Rehash command needs to be run before starting apache.
 c_rehash /etc/ssl/certs
@@ -26,7 +26,6 @@ c_rehash /etc/ssl/certs
 a2enmod ssl
 a2enmod include
 a2ensite default-ssl 
-a2ensite fleming-dev.openshift.dsc.umich.edu
 
 ## set SGID for www-data 
 chown -R www-data.www-data /var/www/html /var/cosign
